@@ -1,0 +1,308 @@
+#TRAVEL WEBSITE
+
+#####FRONTEND#####
+{
+    7 .html FILES/PAGES - #index.html , #explore.html , #package-details.html , #about.html , #contact.html , #admin-login.html , #admin-dashboard.html
+
+    1 COMMON .js FILE in /js folder(js/script.js) - #script.js
+
+    1 COMMON .css FILE in /css folder(css/style.css) - #style.css 
+}
+
+-NAVBAR common for all pages :
+'''
+<header class="navbar">
+    <div class="logo">
+        <img class="logoImage" src="images/travelLogo2.png" alt="logo">
+        <h1 class="logoText">ExploreWorld.</h1>
+    </div>
+
+    <nav>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="explore.html">Explore</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="admin-login.html">Admin</a></li>
+        </ul>
+    </nav>
+
+    <div class="hamburger" id="menuToggle">☰</div>
+</header>
+'''
+
+-FOOTER common for all pages :
+'''
+<footer class="footer">
+    <p>© 2026 ExploreWorld. All rights reserved.</p>
+</footer>
+'''
+
+#APIS USED : http://localhost:8081/api/packages (GET) x2
+                       http://localhost:8081/api/packages/${id}   (GET) x1
+                       http://localhost:8081/api/contacts (POST) x1
+                        http://localhost:8081/api/admin/login (POST) x1
+                       http://localhost:8081/api/contacts  (GET) x1
+                        http://localhost:8081/api/packages/upload (POST) x1
+                        http://localhost:8081/api/admin/logout (GET) x1
+                        http://localhost:8081/api/admin/check-session (GET) x1
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+#####BACKEND#####
+
+travel-backend : folder name 
+
+exploreworld : main package name 
+
+#com.exploreworld.travel_backend.-------- : main address
+
+#6 subfolders and 1 mainjava class file inside : travel-backend/src/main/java/com.exploreworld.travel_backend
+
+#6-SUBFOLDERS : ( config , controller , dto , entity , repository , service ) 
+#MAIN FILE JAVA : TravelBackendApplication.java
+
+-----------------------------
+#'controller' folder
+# 3-Controllers - PackageController.java , ContactController.java , AdminController.java
+ 
+1. PackageController : 
+-used for all package/cards related api handling.
+-(@RequestMapping : "/api/packages" )
+-(@CrossOrigin(origins = "http://localhost:5500", allowCredentials = "true") )
+
+- linked/uses repository:PackageRepository.java , entity:Package.java 
+
+1x Get
+1x Get "/{id}"
+1x Post "/upload"
+
+2. ContactController :
+-used for contactform data saving and fetching.
+-(@RequestMapping : "/api/contacts" )
+-(@CrossOrigin(origins = "*") )
+
+- linked/uses repository:ContactRepository.java , entity:Contact.java , services:ContactService.java and ContactServiceImpl.java , dto:ContactDTO.java
+
+1x Post 
+1x Get 
+
+3. AdminController :
+-used for admin-login credentials post and fetch + logout button post and fetch
+-(@RequestMapping("/api/admin") )
+-(@CrossOrigin( origins ="http://localhost:5500", allowCredentials = "true") )
+
+-linked/uses dto:AdminLoginRequest.java 
+
+1x Post "/login" 
+1x Get "/check-session"
+1x Post "/logout"
+1x Get "/logout"
+
+-------------------------------------------------
+#'dto' folder
+# 2-DTOs - AdminLoginRequest.java , ContactDTO.java 
+
+-------------------------------------------------
+#'service' folder
+# 2-Services - ContactService.java , ContactServiceImpl.java
+
+-------------------------------------------------
+#'entity' folder
+# 2-Entities - Contact.java , Package.java 
+
+-------------------------------------------------
+#'repository' folder
+# 2-Repositories - ContactRepository.java , PackageRepository.java 
+
+-------------------------------------------------
+#'config' folder 
+# 1-file - StaticResourceConfig.java
+
+content : 
+package com.exploreworld.travel_backend.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class StaticResourceConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/images/**")
+                .addResourceLocations("file:C:/Users/Parth Study/Desktop/projects/travel_learning/images/");
+    }
+}
+
+
+----------------------------------------------------------------------------------------------
+--application.properties :
+# ===============================
+# SERVER CONFIG
+# ===============================
+server.port=8081
+
+# ===============================
+# DATABASE CONFIG (MySQL)
+# ===============================
+spring.datasource.url=jdbc:mysql://localhost:3306/travel_db
+spring.datasource.username=root
+spring.datasource.password=Parth1006
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# ===============================
+# JPA / HIBERNATE CONFIG
+# ===============================
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+# ===============================
+# JPA OPEN-IN-VIEW (OPTIONAL)
+# ===============================
+spring.jpa.open-in-view=false
+
+spring.servlet.multipart.enabled=true
+spring.servlet.multipart.max-file-size=10MB
+spring.servlet.multipart.max-request-size=10MB
+
+----------------------------------------------------------------------------------------------------------------------
+
+--pom.xml :
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.exploreworld</groupId>
+	<artifactId>travel-backend</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>travel-backend</name>
+	<description>Travel Backend Spring Boot Project</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.2.2</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+
+	<dependencies>
+		<!-- Spring Boot Starter Web -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- Spring Boot Starter Data JPA -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<!-- MySQL Connector -->
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Validation API -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+		<!-- Lombok (optional for getters/setters) -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<!-- For testing -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- Spring Boot Maven Plugin -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+--------------------------------------------------------------------------------------------------------------------------------
+
+#####DATABASE#####
+
+#MySQL database name: 'travel_db'
+2 TABLES : 'contact_messages' , 'packages'
+
+'contact_messages'
++----+--------+-----------------+---------+-------+------------+-------------+--------------+
+| id | city   | email           | message | name  | phone      | state       | package_name |
++----+--------+-----------------+---------+-------+------------+-------------+--------------+
+| 15 | Akola  | parth@gmail.com | hello   | Parth | 1234567890 | Maharashtra | Paris Tour   |
+| 16 | Nagpur | abc@gmail.com   | hello1  | test  | 0987654321 | Maharashtra | Bali Trip    |
++----+--------+-----------------+---------+-------+------------+-------------+--------------+
+
+'packages'
++-------------+-------------------+-----------+-------------------------+
+| id          | name              | price     | image_url               |
++-------------+-------------------+-----------+-------------------------+
+| bali        | Bali Trip         | 85,000   | images/bali.webp        |
+| brazil      | Brazil Tour       | 1,30,000 | images/brazil.webp      |
+| china       | China Tourism     | 100000   | images/china.webp       |
+| dubai       | Dubai Holiday     | 95,000   | images/dubai.webp       |
+| egypt       | Egypt Holidays    | 120000   | images/egypt.webp       |
+| hongkong    | Hong Kong Tour    | 1,50,000 | images/hongkong.webp    |
+| italy       | Italy Trip        | 1,00,000 | images/italy.webp       |
+| japan       | Japan Tour        | 1,25,000 | images/japan.webp       |
+| malaysia    | Malaysia Trip     |  80000   | images/malaysia.webp    |
+| paris       | Paris Tour        | 1,20,000 | images/paris.webp       |
+| singapore   | Singapore Holiday | 50,000   | images/singapore.webp   |
+| srilanka    | Srilanka Tour     | 60000   | images/srilanka.webp    |
+| switzerland | Switzerland Tour  | 150000   | images/switzerland.webp |
++-------------+-------------------+-----------+-------------------------+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
