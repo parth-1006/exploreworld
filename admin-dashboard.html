@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExploreWorld | Admin-Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="admin-page">
+<!--NAVBAR-common-->
+<header class="navbar">
+    <div class="logo">
+        <img class="logoImage" src="images/travelLogo2.png" alt="logo">
+        <h1 class="logoText">ExploreWorld.</h1>
+    </div>
+
+    <nav>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="explore.html">Explore</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="admin-login.html">Admin</a></li>
+        </ul>
+    </nav>
+
+    <div class="hamburger" id="menuToggle">☰</div>
+</header>
+
+<!--ADMIN-DASHBOARD-->
+<div class="admin-dashboard">
+    <h1>Admin Dashboard</h1>
+
+    <div class="admin-contact-dashboard">
+        <h2>Contact Form Response</h2>
+        <table border="1" id="contactTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Package</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    </div>
+
+    <div class="admin-package-dashboard">
+         <h2>Add New Package</h2>
+
+            <form id="addPackageForm" class="admin-form" enctype="multipart/form-data">
+            <input type="text" name="id" placeholder="Package ID (no spaces)" required>
+            <input type="text" name="name" placeholder="Package Name" required>
+            <input type="text" name="price" placeholder="Price (₹1,20,000)" required>
+
+            <input type="file" name="image" accept="image/*" required>
+
+            <button type="submit" class="btn-primary">Add Package</button>
+        </form>
+    </div>
+
+    <button id="logoutBtn" class="btn-primary">Logout</button>
+
+
+</div>
+
+<!--FOOTER-common-->
+<footer class="footer">
+    <p>© 2026 ExploreWorld. All rights reserved.</p>
+</footer>
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>

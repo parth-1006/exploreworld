@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExploreWorld | Contact</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<!--NAVBAR-common-->
+<header class="navbar">
+    <div class="logo">
+        <img class="logoImage" src="images/travelLogo2.png" alt="logo">
+        <h1 class="logoText">ExploreWorld.</h1>
+    </div>
+
+    <nav>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="explore.html">Explore</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="admin-login.html">Admin</a></li>
+        </ul>
+    </nav>
+
+    <div class="hamburger" id="menuToggle">☰</div>
+</header>
+
+<!--PAGE-SECTION-->
+<section class="page-section">
+    <h1>Contact Us</h1>
+
+    <form class="contact-form" id="contactForm">
+        <input type="text" name="name" placeholder="Your Name*" required>
+        <input type="email" name="email" placeholder="Email*" required>
+        <input type="tel" name="phone" placeholder="Contact Number*" required>
+
+        <select id="packageSelect" name="packageName">
+            <option value="">Interested Package</option>
+        </select>
+
+        <select id="stateSelect" name="state">
+            <option value="">Select State*</option>
+        </select>
+
+        <select id="citySelect" name="city">
+            <option value="">Select City*</option>
+        </select>
+
+        <textarea name="message" placeholder="Your Message*" required></textarea>
+        <button type="submit" class="btn-primary">Send</button>
+    </form>
+</section>
+
+<!--FOOTER-common-->
+<footer class="footer">
+    <p>© 2026 ExploreWorld. All rights reserved.</p>
+</footer>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>

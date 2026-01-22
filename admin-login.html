@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExploreWorld | Admin-Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<!--NAVBAR-common-->
+<header class="navbar">
+    <div class="logo">
+        <img class="logoImage" src="images/travelLogo2.png" alt="logo">
+        <h1 class="logoText">ExploreWorld.</h1>
+    </div>
+
+    <nav>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="explore.html">Explore</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="admin-login.html">Admin</a></li>
+        </ul>
+    </nav>
+
+    <div class="hamburger" id="menuToggle">☰</div>
+</header>
+
+<!--ADMIN-PAGE-->
+<div class="admin-login">
+    <h1>Admin Login</h1>
+
+    <h3>Please enter valid NAME and PASSWORD !</h3>
+
+    <form class="adminLoginForm" id="adminLoginForm">
+        <input type="text" id="adminName" placeholder="Admin Name" required>
+        <input type="password" id="adminPassword" placeholder="Password" required>
+        <button class="btn-primary" type="submit" id="loginBtn">Login</button>
+    </form>
+
+    <p id="loginError"></p>
+</div>
+
+<!--FOOTER-common-->
+<footer class="footer">
+    <p>© 2026 ExploreWorld. All rights reserved.</p>
+</footer>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
