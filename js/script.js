@@ -23,7 +23,7 @@ if (packageGrid) {
                 card.classList.add("card", "package-card");
 
                 card.innerHTML = `
-                    <img src="https://parth-1006.github.io/exploreworld/images/${pkg.imageUrl}" alt="${pkg.name}">
+                    <img src="https://github.com/parth-1006/exploreworld/blob/main/images/${pkg.imageUrl}" alt="${pkg.name}">
                     <h3>${pkg.name}</h3>
                     <p>Starting from ${pkg.price}</p>
                     <button class="btn-primary details-btn">Details</button>
