@@ -12,7 +12,7 @@ if (menuToggle) {
 const packageGrid = document.getElementById("packageGrid");
 
 if (packageGrid) {
-    fetch("http://localhost:8081/api/packages")
+    fetch("https://exploreworld-backend.onrender.com/api/packages")
         .then(res => res.json())
         .then(packagesData => {
 
@@ -23,7 +23,7 @@ if (packageGrid) {
                 card.classList.add("card", "package-card");
 
                 card.innerHTML = `
-                    <img src="http://localhost:8081/${pkg.imageUrl}" alt="${pkg.name}">
+                    <img src="https://exploreworld-backend.onrender.com/${pkg.imageUrl}" alt="${pkg.name}">
                     <h3>${pkg.name}</h3>
                     <p>Starting from ${pkg.price}</p>
                     <button class="btn-primary details-btn">Details</button>
@@ -43,7 +43,7 @@ if (packageGrid) {
 const homePackageGrid = document.getElementById("homePackageGrid");
 
 if (homePackageGrid) {
-        fetch("http://localhost:8081/api/packages")
+        fetch("https://exploreworld-backend.onrender.com/api/packages")
         .then(res => res.json())
         .then(packagesData => {
 
@@ -95,11 +95,11 @@ if (detailsCard) {
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
 
-    fetch(`http://localhost:8081/api/packages/${id}`)
+    fetch(`https://exploreworld-backend.onrender.com/api/packages/${id}`)
         .then(res => res.json())
         .then(pkg => {
             detailsCard.innerHTML = `
-                <img src="http://localhost:8081/${pkg.imageUrl}" alt="${pkg.name}">
+                <img src="https://exploreworld-backend.onrender.com/${pkg.imageUrl}" alt="${pkg.name}">
                 <h2>${pkg.name}</h2>
                 <p><strong>Package ID:</strong> ${pkg.id}</p>
                 <p><strong>Price:</strong> ${pkg.price}</p>
@@ -181,7 +181,7 @@ if (contactForm) {
             packageName: formData.get("packageName") || null
         };
 
-        fetch("http://localhost:8081/api/contacts", {
+        fetch("https://exploreworld-backend.onrender.com/api/contacts", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -210,7 +210,7 @@ if (adminForm) {
         const name = document.getElementById("adminName").value;
         const password = document.getElementById("adminPassword").value;
 
-        const response = await fetch("http://localhost:8081/api/admin/login", {
+        const response = await fetch("https://exploreworld-backend.onrender.com/api/admin/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -234,7 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const contactTable = document.getElementById("contactTable");
 
     if (contactTable) {
-        fetch("http://localhost:8081/api/contacts")
+        fetch("https://exploreworld-backend.onrender.com/api/contacts")
             .then(response => response.json())
             .then(data => {
                 console.log("Contacts received:", data);
@@ -272,7 +272,7 @@ if (addPackageForm) {
         const formData = new FormData(addPackageForm);
 
         try {
-            const response = await fetch("http://localhost:8081/api/packages/upload", {
+            const response = await fetch("https://exploreworld-backend.onrender.com/api/packages/upload", {
                 method: "POST",
                 credentials: "include",
                 body: formData
@@ -284,7 +284,8 @@ if (addPackageForm) {
                 setTimeout(()=>{
                     location.reload(); // refresh table & cards
                 })} else {
-                alert("Failed to add package");
+                const msg = await response.text();
+                alert(msg || "Failed to add package");
             }
         } catch (err) {
             console.error("Upload error:", err);
@@ -297,7 +298,7 @@ if (addPackageForm) {
 const logoutBtn = document.getElementById("logoutBtn");
 if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
-        await fetch("http://localhost:8081/api/admin/logout", {
+        await fetch("https://exploreworld-backend.onrender.com/api/admin/logout", {
             method: "GET",
             credentials: "include"
         });
@@ -309,7 +310,7 @@ if (logoutBtn) {
 if (document.body.classList.contains("admin-page")) {
     // check session every 1 seconds
     setInterval(() => {
-        fetch("http://localhost:8081/api/admin/check-session", {
+        fetch("https://exploreworld-backend.onrender.com/api/admin/check-session", {
             credentials: "include"
         })
         .then(res => {
