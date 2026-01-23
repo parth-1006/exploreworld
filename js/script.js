@@ -23,7 +23,7 @@ if (packageGrid) {
                 card.classList.add("card", "package-card");
 
                 card.innerHTML = `
-                    <img src="${pkg.image_url}" alt="${pkg.name}">
+                    <img src=${pkg.image_url} alt="${pkg.name}">
                     <h3>${pkg.name}</h3>
                     <p>Starting from ${pkg.price}</p>
                     <button class="btn-primary details-btn">Details</button>
@@ -55,7 +55,7 @@ if (homePackageGrid) {
         card.classList.add("card", "package-card");
 
         card.innerHTML = `
-            <img src="${pkg.image_url}" alt="${pkg.name}">
+            <img src=${pkg.image_url} alt="${pkg.name}">
             <h3>${pkg.name}</h3>
             <p>Starting from ${pkg.price}</p>
         `;
@@ -99,7 +99,7 @@ if (detailsCard) {
         .then(res => res.json())
         .then(pkg => {
             detailsCard.innerHTML = `
-                <img src="${pkg.image_url}" alt="${pkg.name}">
+                <img src=${pkg.image_url} alt="${pkg.name}">
                 <h2>${pkg.name}</h2>
                 <p><strong>Package ID:</strong> ${pkg.id}</p>
                 <p><strong>Price:</strong> ${pkg.price}</p>
