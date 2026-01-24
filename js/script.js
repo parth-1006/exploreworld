@@ -234,9 +234,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const contactTable = document.getElementById("contactTable");
 
     if (contactTable) {
-        fetch("https://exploreworld-backend.onrender.com/api/contacts")
-            .then(response => response.json())
-            .then(data => {
+        fetch("https://exploreworld-backend.onrender.com/api/contacts", {
+        credentials: "include"
+        })
+        .then(response => response.json())
+        .then(data => {
                 console.log("Contacts received:", data);
 
                 const tableBody = contactTable.querySelector("tbody");
